@@ -1,0 +1,50 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.0.M7'
+    }
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        mavenCentral()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'me.xiaff.crawler'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 9
+
+repositories {
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    mavenCentral()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+}
+
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('us.codecraft:webmagic-core:0.7.3') {
+        exclude group: 'org.slf4j'
+    }
+    compile('us.codecraft:webmagic-extension:0.7.3') {
+        exclude group: 'org.slf4j'
+        exclude group: 'redis.clients', module: 'jedis'
+    }
+    compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
+    compile group: 'org.springframework', name: 'spring-web', version: '5.0.2.RELEASE'
+    compile group: 'org.jbibtex', name: 'jbibtex', version: '1.0.15'
+
+    runtime group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
+    runtime('mysql:mysql-connector-java')
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
