@@ -10,10 +10,10 @@ import java.util.Date;
  * Created by Dell-lcw on 2017/4/7.
  */
 @Entity
-@Table(name = "paper_v2")
+@Table(name = "paper")
 public class Paper {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String author;
@@ -21,41 +21,41 @@ public class Paper {
     private String year;
     private String parent;
     private String bibId;
-    private String type;
-    private Long citation;
+//    private String type;
+    private Integer citation;
 
     private String citationElement1;
     private String citationElement2;
 
-    private Long citationNum1;
-    private Long citationNum2;
+    private Integer citationNum1;
+    private Integer citationNum2;
 
-    @Temporal(value = TemporalType.TIMESTAMP)
-    @CreationTimestamp
-    private Date createTime;
-
-    @Temporal(value = TemporalType.TIMESTAMP)
-    @UpdateTimestamp
-    private Date updateTime;
+//    @Temporal(value = TemporalType.TIMESTAMP)
+//    @CreationTimestamp
+//    private Date createTime;
+//
+//    @Temporal(value = TemporalType.TIMESTAMP)
+//    @UpdateTimestamp
+//    private Date updateTime;
 
     public Paper() {
     }
 
-    public Paper(String title, String author, String url, String year, String parent, String bibId, String type, Long citation, String citationElement1, String citationElement2, Long citationNum1, Long citationNum2, Date createTime, Date updateTime) {
+    public Paper(String title, String author, String url, String year, String parent, String bibId, String type, Integer citation, String citationElement1, String citationElement2, Integer citationNum1, Integer citationNum2, Date createTime, Date updateTime) {
         this.title = title;
         this.author = author;
         this.url = url;
         this.year = year;
         this.parent = parent;
         this.bibId = bibId;
-        this.type = type;
+//        this.type = type;
         this.citation = citation;
         this.citationElement1 = citationElement1;
         this.citationElement2 = citationElement2;
         this.citationNum1 = citationNum1;
         this.citationNum2 = citationNum2;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
+//        this.createTime = createTime;
+//        this.updateTime = updateTime;
     }
 
     public Long getId() {
@@ -114,20 +114,29 @@ public class Paper {
         this.bibId = bibId;
     }
 
-    public String getType() {
-        return type;
-    }
+//    public String getType() {
+//        return type;
+//    }
+//
+//    public void setType(String type) {
+//        this.type = type;
+//    }
 
-    public void setType(String type) {
-        this.type = type;
-    }
 
-    public Long getCitation() {
+    public Integer getCitation() {
         return citation;
     }
 
-    public void setCitation(Long citation) {
+    public void setCitation(Integer citation) {
         this.citation = citation;
+    }
+
+    public void setCitationNum1(Integer citationNum1) {
+        this.citationNum1 = citationNum1;
+    }
+
+    public void setCitationNum2(Integer citationNum2) {
+        this.citationNum2 = citationNum2;
     }
 
     public String getCitationElement1() {
@@ -146,37 +155,21 @@ public class Paper {
         this.citationElement2 = citationElement2;
     }
 
-    public Long getCitationNum1() {
-        return citationNum1;
-    }
-
-    public void setCitationNum1(Long citationNum1) {
-        this.citationNum1 = citationNum1;
-    }
-
-    public Long getCitationNum2() {
-        return citationNum2;
-    }
-
-    public void setCitationNum2(Long citationNum2) {
-        this.citationNum2 = citationNum2;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
+//    public Date getCreateTime() {
+//        return createTime;
+//    }
+//
+//    public void setCreateTime(Date createTime) {
+//        this.createTime = createTime;
+//    }
+//
+//    public Date getUpdateTime() {
+//        return updateTime;
+//    }
+//
+//    public void setUpdateTime(Date updateTime) {
+//        this.updateTime = updateTime;
+//    }
 
     @Override
     public String toString() {
@@ -188,14 +181,14 @@ public class Paper {
                 ", year='" + year + '\'' +
                 ", parent='" + parent + '\'' +
                 ", bibId='" + bibId + '\'' +
-                ", type='" + type + '\'' +
+//                ", type='" + type + '\'' +
                 ", citation=" + citation +
                 ", citationElement1='" + citationElement1 + '\'' +
                 ", citationElement2='" + citationElement2 + '\'' +
                 ", citationNum1=" + citationNum1 +
                 ", citationNum2=" + citationNum2 +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
+//                ", createTime=" + createTime +
+//                ", updateTime=" + updateTime +
                 '}';
     }
 }

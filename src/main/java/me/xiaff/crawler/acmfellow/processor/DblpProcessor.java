@@ -1,6 +1,7 @@
 package me.xiaff.crawler.acmfellow.processor;
 
 import me.xiaff.crawler.acmfellow.entity.Paper;
+import me.xiaff.crawler.acmfellow.util.EnglishNameUtils;
 import org.jbibtex.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -23,14 +24,13 @@ public class DblpProcessor {
 
         Elements links = doc.select("#completesearch-authors > div > ul > li > a");
         for (Element link : links) {
-            String spanText = link.select("span").text()
-                    .replace(" ", "")
-                    .replace(".", "");
+            String spanText = link.select("span").text();
             Elements marks = link.select("mark");
-            String markText = marks.stream().map(Element::text).collect(Collectors.joining());
-//            System.out.println("span: " + spanText);
-//            System.out.println("mark: " + markText);
-            if (spanText.equals(markText)) {
+            String markText = marks.stream().map(Element::text).collect(Collectors.joining(" "));
+            System.out.println("span: " + spanText);
+            System.out.println("mark: " + markText);
+            if (spanText.equals(markText) ||
+                    EnglishNameUtils.toCommaSepName(spanText).startsWith(EnglishNameUtils.toCommaSepName(markText))) {
                 return link.attr("href");
             }
         }
@@ -67,7 +67,7 @@ public class DblpProcessor {
             } else {
                 continue;
             }
-            paper.setType(entryType.getValue());
+//            paper.setType(entryType.getValue());
 
             paper.setBibId(dblpId);
             paper.setTitle(toPlainText(bibTeXEntry.getField(BibTeXEntry.KEY_TITLE)));
@@ -90,7 +90,7 @@ public class DblpProcessor {
             List<LaTeXObject> latexObjects = new LaTeXParser().parse(latexValue.toUserString());
             return new LaTeXPrinter().print(latexObjects)
                     .replaceAll("\n+", " ")
-                    .replaceAll(" +"," ");
+                    .replaceAll(" +", " ");
         } catch (ParseException e) {
             e.printStackTrace();
             return latexValue.toUserString().replaceAll("\n+", "");
@@ -98,8 +98,8 @@ public class DblpProcessor {
     }
 
     public static void main(String[] args) throws ParseException {
-//        System.out.println(new DblpProcessor().searchAuthor("Marti A. Hearst"));
-//        System.out.println(new DblpProcessor().searchAuthor("Su, Jian"));
-        new DblpProcessor().getBibs("http://dblp.uni-trier.de/pers/tb2/e/Ester:Martin");
+        System.out.println(new DblpProcessor().searchAuthor("Marti A. Hearst"));
+//        System.out.println(new DblpProcessor().searchAuthor("Blackburn, Stephen"));
+//        new DblpProcessor().getBibs("http://dblp.uni-trier.de/pers/tb2/e/Ester:Martin");
     }
 }

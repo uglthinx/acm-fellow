@@ -6,20 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
-public class GetDblpLinksTest {
+@RunWith(SpringRunner.class)
+public class FindGoogleCitationsTest {
 
     @Autowired
-    private GetDblpLinks getDblpLinks;
+    private FindGoogleCitations findGoogleCitations;
 
     @Test
-    public void run() throws Exception {
-        getDblpLinks.getAminerScholarsLinks();
-    }
-
-    @Test
-    public void getFellowsLinks() throws Exception {
-        getDblpLinks.getFellowsLinks();
+    public void finExtraPaperCites() throws  Exception{
+        System.setProperty("java.net.preferIPv6Addresses", "true");
+        findGoogleCitations.finExtraPaperCites();
     }
 }

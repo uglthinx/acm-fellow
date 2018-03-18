@@ -1,4 +1,4 @@
-package me.xiaff.crawler.acmfellow.processor;
+package me.xiaff.crawler.acmfellow.processor.google;
 
 import me.xiaff.crawler.acmfellow.entity.OrgNameFormation;
 import me.xiaff.crawler.acmfellow.util.HttpRequestFactory;

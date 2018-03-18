@@ -1,38 +1,46 @@
 package me.xiaff.crawler.acmfellow.onetime;
 
+import me.xiaff.crawler.acmfellow.entity.AminerScholar;
 import me.xiaff.crawler.acmfellow.entity.FellowDO;
 import me.xiaff.crawler.acmfellow.entity.OrgNameFormation;
-import me.xiaff.crawler.acmfellow.processor.GoogleOrgNameProcessor;
+import me.xiaff.crawler.acmfellow.processor.google.GoogleOrgNameProcessor;
+import me.xiaff.crawler.acmfellow.repo.AminerScholarRepo;
 import me.xiaff.crawler.acmfellow.repo.FellowRepo;
 import me.xiaff.crawler.acmfellow.repo.OrgNameFormationRepo;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Component
-public class FindGoogleFormalName implements CommandLineRunner {
+public class FindGoogleFormalName {
     private GoogleOrgNameProcessor orgNameProcessor = new GoogleOrgNameProcessor();
-    private static final Logger log = LoggerFactory.getLogger(FindGoogleCitations.class);
+    private static final Logger log = LoggerFactory.getLogger(FindGoogleFormalName.class);
+
+//    @Resource
+//    private FellowRepo fellowRepo;
 
     @Resource
-    private FellowRepo fellowRepo;
+    private AminerScholarRepo aminerScholarRepo;
     @Resource
     private OrgNameFormationRepo orgNameFormationRepo;
 
-    @Override
+    //    @Override
     public void run(String... args) throws Exception {
         System.out.println("============================================");
         System.out.println("============FindGoogleFormalName============");
         System.out.println("============================================");
 
-        List<FellowDO> fellows = fellowRepo.findAll();
-        for (FellowDO fellow : fellows) {
-            String school = fellow.getFinalPhdSchool();
-            if(orgNameFormationRepo.findByOldName(school)!=null){
+        List<AminerScholar> fellows = aminerScholarRepo.findAll();
+        for (AminerScholar fellow : fellows) {
+            String school = fellow.getPhdSchool();
+            if (StringUtils.isEmpty(school)) {
+                continue;
+            }
+            if (orgNameFormationRepo.findByOldName(school) != null) {
                 continue;
             }
             log.info("{}@[{}] ...", fellow.getName(), school);
@@ -41,6 +49,7 @@ public class FindGoogleFormalName implements CommandLineRunner {
                 log.info(nameFormation.toString());
                 orgNameFormationRepo.save(nameFormation);
             }
+            Thread.sleep(3000);
         }
     }
 }

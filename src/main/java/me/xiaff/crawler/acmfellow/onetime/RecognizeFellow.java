@@ -49,7 +49,6 @@ public class RecognizeFellow {
             }
         }
 
-        aminerScholarRepo.saveAll(aminerScholars);
-
+        aminerScholarRepo.save(aminerScholars);
     }
 }

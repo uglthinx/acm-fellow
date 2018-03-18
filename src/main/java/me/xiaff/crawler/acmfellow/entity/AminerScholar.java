@@ -1,6 +1,6 @@
 package me.xiaff.crawler.acmfellow.entity;
 
-import org.apache.commons.lang3.StringUtils;
+import me.xiaff.crawler.acmfellow.util.EnglishNameUtils;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -37,6 +37,10 @@ public class AminerScholar {
 
     private String page;
 
+    private String phdSchool;
+
+    private String phdSchoolLink;
+
     private Boolean acmFellow;
 
     private Boolean ieeeFellow;
@@ -56,7 +60,7 @@ public class AminerScholar {
     public AminerScholar() {
     }
 
-    public AminerScholar(String aminerId, String name, String fullName, String gender, Integer hIndex, Integer paperNum, Integer citationNum, String position, String affiliation, String fields, String page, Boolean acmFellow, Boolean ieeeFellow, String dblpLink, Boolean crawled, Date createTime, Date updateTime) {
+    public AminerScholar(String aminerId, String name, String fullName, String gender, Integer hIndex, Integer paperNum, Integer citationNum, String position, String affiliation, String fields, String page, String phdSchool, String phdSchoolLink, Boolean acmFellow, Boolean ieeeFellow, String dblpLink, Boolean crawled, Date createTime, Date updateTime) {
         this.aminerId = aminerId;
         this.name = name;
         this.fullName = fullName;
@@ -68,6 +72,8 @@ public class AminerScholar {
         this.affiliation = affiliation;
         this.fields = fields;
         this.page = page;
+        this.phdSchool = phdSchool;
+        this.phdSchoolLink = phdSchoolLink;
         this.acmFellow = acmFellow;
         this.ieeeFellow = ieeeFellow;
         this.dblpLink = dblpLink;
@@ -108,7 +114,7 @@ public class AminerScholar {
         this.fullName = fullName;
         String[] tokens = fullName.split(" ");
         String[] nameTokens = Arrays.copyOfRange(tokens, 0, tokens.length - 1);
-        this.name = tokens[tokens.length - 1] + ", " + StringUtils.join(nameTokens, " ");
+        this.name = EnglishNameUtils.toCommaSepName(fullName);
     }
 
     public String getGender() {
@@ -175,6 +181,22 @@ public class AminerScholar {
         this.page = page;
     }
 
+    public String getPhdSchool() {
+        return phdSchool;
+    }
+
+    public void setPhdSchool(String phdSchool) {
+        this.phdSchool = phdSchool;
+    }
+
+    public String getPhdSchoolLink() {
+        return phdSchoolLink;
+    }
+
+    public void setPhdSchoolLink(String phdSchoolLink) {
+        this.phdSchoolLink = phdSchoolLink;
+    }
+
     public Boolean getCrawled() {
         return crawled;
     }
@@ -238,6 +260,8 @@ public class AminerScholar {
                 ", affiliation='" + affiliation + '\'' +
                 ", fields='" + fields + '\'' +
                 ", page='" + page + '\'' +
+                ", phdSchool='" + phdSchool + '\'' +
+                ", phdSchoolLink='" + phdSchoolLink + '\'' +
                 ", acmFellow=" + acmFellow +
                 ", ieeeFellow=" + ieeeFellow +
                 ", dblpLink='" + dblpLink + '\'' +

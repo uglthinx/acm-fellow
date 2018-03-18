@@ -7,6 +7,7 @@ import me.xiaff.crawler.acmfellow.processor.DblpProcessor;
 import me.xiaff.crawler.acmfellow.repo.AminerScholarRepo;
 import me.xiaff.crawler.acmfellow.repo.AuthorPaperRepo;
 import me.xiaff.crawler.acmfellow.repo.PaperRepo;
+import org.jbibtex.ParseException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -33,7 +34,7 @@ public class DownloadDblpPapers {
             }
             authorPaperList.add(new AuthorPaper(authorId, paper.getBibId(), Integer.parseInt(paper.getYear())));
         }
-        authorPaperRepo.saveAll(authorPaperList);
+        authorPaperRepo.save(authorPaperList);
     }
 
     public void run() throws Exception {
@@ -55,7 +56,17 @@ public class DownloadDblpPapers {
             List<Paper> newPapers = papers.stream()
                     .filter(p -> paperRepo.findByBibId(p.getBibId()) == null)
                     .collect(Collectors.toList());
-            paperRepo.saveAll(newPapers);
+            paperRepo.save(newPapers);
         }
+    }
+
+    public void downloadExtraLinks(String link, String name) throws ParseException {
+        DblpProcessor dblpProcessor = new DblpProcessor();
+        List<Paper> papers = dblpProcessor.getBibs(link.replace("/hd/", "/tb2/"));
+        addPaperAuthorRelations(name, papers);
+        List<Paper> newPapers = papers.stream()
+                .filter(p -> paperRepo.findByBibId(p.getBibId()) == null)
+                .collect(Collectors.toList());
+        paperRepo.save(newPapers);
     }
 }

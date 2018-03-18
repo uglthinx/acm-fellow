@@ -1,4 +1,4 @@
-package me.xiaff.crawler.acmfellow.processor;
+package me.xiaff.crawler.acmfellow.processor.google;
 
 import me.xiaff.crawler.acmfellow.entity.CiteNumber;
 import me.xiaff.crawler.acmfellow.util.HttpRequestFactory;
@@ -18,6 +18,7 @@ public class GoogleCitationProcessor {
             return null;
         }
         Document document = Jsoup.parse(html);
+//        System.out.println(document.body());
 
         CiteNumber citeNumber = new CiteNumber();
         Elements scholarCite = document.select("#topstuff span.f");

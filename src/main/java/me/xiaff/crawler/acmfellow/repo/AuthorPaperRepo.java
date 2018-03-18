@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface AuthorPaperRepo extends JpaRepository<AuthorPaper, Long> {
-    @Query("select count(ap) from AuthorPaper ap where ap.authorName=:author and ap.bibId=:bib")
+    @Query("select count(ap) from AuthorPaper ap where ap.author=:author and ap.bibId=:bib")
     long countByRelation(@Param("author") String authorId, @Param("bib") String bibId);
 }

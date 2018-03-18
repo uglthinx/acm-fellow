@@ -2,6 +2,7 @@ package me.xiaff.crawler.acmfellow.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.boot.autoconfigure.web.ResourceProperties;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,42 +11,42 @@ import java.util.Date;
  * Created by Dell-lcw on 2017/4/7.
  */
 @Entity
-@Table(name = "author_paper_v2")
+@Table(name = "author_paper")
 public class AuthorPaper {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    private String authorName;
+    private String author;
     private String bibId;
     private Integer year;
-    private Integer citation;
+    private Integer citationCount;
 
-    @Temporal(value = TemporalType.TIMESTAMP)
-    @CreationTimestamp
-    private Date createTime;
-
-    @Temporal(value = TemporalType.TIMESTAMP)
-    @UpdateTimestamp
-    private Date updateTime;
+//    @Temporal(value = TemporalType.TIMESTAMP)
+//    @CreationTimestamp
+//    private Date createTime;
+//
+//    @Temporal(value = TemporalType.TIMESTAMP)
+//    @UpdateTimestamp
+//    private Date updateTime;
 
 
     public AuthorPaper() {
     }
 
     public AuthorPaper(String authorName, String bibId, Integer year) {
-        this.authorName = authorName;
+        this.author = authorName;
         this.bibId = bibId;
         this.year = year;
     }
 
     public AuthorPaper(Long id, String authorName, String bibId, Integer year, Integer citation, Date createTime, Date updateTime) {
         this.id = id;
-        this.authorName = authorName;
+        this.author = authorName;
         this.bibId = bibId;
         this.year = year;
-        this.citation = citation;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
+        this.citationCount = citation;
+//        this.createTime = createTime;
+//        this.updateTime = updateTime;
     }
 
     public Long getId() {
@@ -56,12 +57,20 @@ public class AuthorPaper {
         this.id = id;
     }
 
-    public String getAuthorName() {
-        return authorName;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public Integer getCitationCount() {
+        return citationCount;
+    }
+
+    public void setCitationCount(Integer citationCount) {
+        this.citationCount = citationCount;
     }
 
     public String getBibId() {
@@ -80,40 +89,33 @@ public class AuthorPaper {
         this.year = year;
     }
 
-    public Integer getCitation() {
-        return citation;
-    }
 
-    public void setCitation(Integer citation) {
-        this.citation = citation;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
+//    public Date getCreateTime() {
+//        return createTime;
+//    }
+//
+//    public void setCreateTime(Date createTime) {
+//        this.createTime = createTime;
+//    }
+//
+//    public Date getUpdateTime() {
+//        return updateTime;
+//    }
+//
+//    public void setUpdateTime(Date updateTime) {
+//        this.updateTime = updateTime;
+//    }
 
     @Override
     public String toString() {
         return "AuthorPaper{" +
                 "id=" + id +
-                ", authorName='" + authorName + '\'' +
+                ", author='" + author + '\'' +
                 ", bibId='" + bibId + '\'' +
                 ", year=" + year +
-                ", citation=" + citation +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
+                ", citationCount=" + citationCount +
+//                ", createTime=" + createTime +
+//                ", updateTime=" + updateTime +
                 '}';
     }
 }
