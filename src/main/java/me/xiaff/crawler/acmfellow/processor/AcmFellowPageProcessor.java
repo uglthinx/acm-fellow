@@ -17,7 +17,7 @@ public class AcmFellowPageProcessor implements PageProcessor {
         Document document = Jsoup.parse(page.getHtml().toString());
         Elements sections = document.select("section.awards-winners__citation");
         for (Element section : sections) {
-            if (section.text().contains("ACM Distinguished Member")) {
+            if (section.text().contains("ACM Fellows")) {
                 String citation = section.select("p.awards-winners__citation-short").text();
                 page.putField("url", page.getRequest().getUrl());
                 page.putField("citation", citation);
