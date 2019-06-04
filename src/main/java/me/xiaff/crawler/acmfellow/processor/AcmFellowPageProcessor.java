@@ -19,6 +19,7 @@ public class AcmFellowPageProcessor implements PageProcessor {
         for (Element section : sections) {
             if (section.text().contains("ACM Fellows")) {
                 String citation = section.select("p.awards-winners__citation-short").text();
+                System.out.println(citation);
                 page.putField("url", page.getRequest().getUrl());
                 page.putField("citation", citation);
             }
