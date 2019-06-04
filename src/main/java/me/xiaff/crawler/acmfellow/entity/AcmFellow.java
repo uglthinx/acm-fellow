@@ -7,8 +7,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "acm_fellow_17")
-public class AcmFellow17 {
+@Table(name = "acm_fellow")
+public class AcmFellow {
     @Id
     @GeneratedValue
     private Long id;
@@ -35,10 +35,10 @@ public class AcmFellow17 {
     @UpdateTimestamp
     private Date updateTime;
 
-    public AcmFellow17() {
+    public AcmFellow() {
     }
 
-    public AcmFellow17(String name, String region, Integer selectYear, String type1, String type2, String description, String url, Date createTime, Date updateTime) {
+    public AcmFellow(String name, String region, Integer selectYear, String type1, String type2, String description, String url, Date createTime, Date updateTime) {
         this.name = name;
         this.region = region;
         this.selectYear = selectYear;
@@ -132,7 +132,7 @@ public class AcmFellow17 {
 
     @Override
     public String toString() {
-        return "AcmFellow17{" +
+        return "AcmFellow{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", region='" + region + '\'' +

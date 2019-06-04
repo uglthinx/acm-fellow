@@ -1,5 +1,6 @@
 package me.xiaff.crawler.acmfellow.processor;
 
+import me.xiaff.crawler.acmfellow.util.HttpClientDownloader;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -18,7 +19,6 @@ public class AcmFellowPageProcessor implements PageProcessor {
         for (Element section : sections) {
             if (section.text().contains("ACM Distinguished Member")) {
                 String citation = section.select("p.awards-winners__citation-short").text();
-                System.out.println(citation);
                 page.putField("url", page.getRequest().getUrl());
                 page.putField("citation", citation);
             }
@@ -33,6 +33,7 @@ public class AcmFellowPageProcessor implements PageProcessor {
     public static void main(String[] args) {
         Spider.create(new AcmFellowPageProcessor())
                 .addPipeline(new ConsolePipeline())
+                .setDownloader(new HttpClientDownloader())
                 .addUrl("https://awards.acm.org/award_winners/kedem_1284975")
                 .run();
     }
