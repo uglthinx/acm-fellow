@@ -7,8 +7,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "ieee_cs_fellow")
-public class IeeeCsFellow {
+@Table(name = "ieee_fellow")
+public class IeeeFellow {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,8 +18,6 @@ public class IeeeCsFellow {
     private Integer selectYear;
 
     private String gender;
-
-    private String society;
 
     private String region;
 
@@ -36,20 +34,9 @@ public class IeeeCsFellow {
     @UpdateTimestamp
     private Date updateTime;
 
-    public IeeeCsFellow() {
+    public IeeeFellow() {
     }
 
-    public IeeeCsFellow(String name, Integer selectYear, String gender, String society, String region, String category, String description, Date createTime, Date updateTime) {
-        this.name = name;
-        this.selectYear = selectYear;
-        this.gender = gender;
-        this.society = society;
-        this.region = region;
-        this.category = category;
-        this.description = description;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-    }
 
     public Long getId() {
         return id;
@@ -81,14 +68,6 @@ public class IeeeCsFellow {
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public String getSociety() {
-        return society;
-    }
-
-    public void setSociety(String society) {
-        this.society = society;
     }
 
     public String getCategory() {
@@ -133,12 +112,11 @@ public class IeeeCsFellow {
 
     @Override
     public String toString() {
-        return "IeeeCsFellow{" +
+        return "IeeeFellow{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", selectYear=" + selectYear +
                 ", gender='" + gender + '\'' +
-                ", society='" + society + '\'' +
                 ", region='" + region + '\'' +
                 ", category='" + category + '\'' +
                 ", description='" + description + '\'' +

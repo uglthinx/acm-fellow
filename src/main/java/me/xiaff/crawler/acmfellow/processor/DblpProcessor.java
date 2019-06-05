@@ -98,8 +98,8 @@ public class DblpProcessor {
     }
 
     public static void main(String[] args) throws ParseException {
-        System.out.println(new DblpProcessor().searchAuthor("Marti A. Hearst"));
-//        System.out.println(new DblpProcessor().searchAuthor("Blackburn, Stephen"));
+//        System.out.println(new DblpProcessor().searchAuthor("Marti A. Hearst"));
+        System.out.println(new DblpProcessor().searchAuthor("Blackburn, Stephen"));
 //        new DblpProcessor().getBibs("http://dblp.uni-trier.de/pers/tb2/e/Ester:Martin");
     }
 }
