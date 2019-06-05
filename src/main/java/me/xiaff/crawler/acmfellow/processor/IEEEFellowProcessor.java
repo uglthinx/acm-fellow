@@ -33,13 +33,13 @@ public class IEEEFellowProcessor {
         form.add("inputFilterJSON", "{\"yearRange\":{\"beginYear\":\"" + startYear + "\",\"endYear\":\"" + endYear + "\"},\"gender\":\"" + gender + "\",\"sortOnList\":[{\"sortByField\":\"fellow.yrElevation\",\"sortType\":\"ASC\"},{\"sortByField\":\"fellow.lastName\",\"sortType\":\"ASC\"}],\"requestedPageNumber\":\"1\",\"typeAhead\":false}");
         List<IeeeFellow> fellowList = new ArrayList<>();
         while (true) {
+            System.out.println("PageNum==================" + pageNum);
             form.set("PageNum", String.valueOf(pageNum++));
             HttpEntity<?> entity = new HttpEntity<Object>(form, HttpRequestFactory.getIeeeHttpHeaders());
 
             ResponseEntity<String> html = restTemplate.postForEntity("https://services27.ieee.org/fellowsdirectory/getpageresultsdesk.html",
                     entity, String.class);
             Document document = Jsoup.parse(html.getBody());
-            System.out.println("=====================================================================");
             Elements rows = document.select("div.tr");
             if (rows.size() == 0) {
                 break;
