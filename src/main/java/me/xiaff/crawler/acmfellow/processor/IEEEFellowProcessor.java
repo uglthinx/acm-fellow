@@ -10,6 +10,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -18,6 +19,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class IEEEFellowProcessor {
 
     @Resource
@@ -60,11 +62,5 @@ public class IEEEFellowProcessor {
             }
         }
         ieeeFellowRepo.save(fellowList);
-    }
-
-    public static void main(String[] args) {
-        new IEEEFellowProcessor().downloadFellows("Men", "2018", "2019");
-        new IEEEFellowProcessor().downloadFellows("Women", "2018", "2019");
-        System.out.println("===================Finished======================");
     }
 }
