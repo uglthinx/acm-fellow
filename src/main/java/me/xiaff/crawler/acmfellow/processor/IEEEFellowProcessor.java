@@ -1,6 +1,5 @@
 package me.xiaff.crawler.acmfellow.processor;
 
-import me.xiaff.crawler.acmfellow.entity.FellowDO;
 import me.xiaff.crawler.acmfellow.entity.IeeeFellow;
 import me.xiaff.crawler.acmfellow.repo.IeeeFellowRepo;
 import me.xiaff.crawler.acmfellow.util.HttpRequestFactory;
@@ -19,6 +18,9 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * IEEE Fellow list crawler
+ */
 @Component
 public class IEEEFellowProcessor {
 

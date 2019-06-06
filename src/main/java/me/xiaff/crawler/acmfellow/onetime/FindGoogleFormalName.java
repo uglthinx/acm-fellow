@@ -1,11 +1,9 @@
 package me.xiaff.crawler.acmfellow.onetime;
 
 import me.xiaff.crawler.acmfellow.entity.AminerScholar;
-import me.xiaff.crawler.acmfellow.entity.FellowDO;
 import me.xiaff.crawler.acmfellow.entity.OrgNameFormation;
 import me.xiaff.crawler.acmfellow.processor.google.GoogleOrgNameProcessor;
 import me.xiaff.crawler.acmfellow.repo.AminerScholarRepo;
-import me.xiaff.crawler.acmfellow.repo.FellowRepo;
 import me.xiaff.crawler.acmfellow.repo.OrgNameFormationRepo;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
